@@ -14,6 +14,10 @@ import type { Editor as TEditor } from "~/editor";
 import usePolicy from "~/hooks/usePolicy";
 import useStores from "~/hooks/useStores";
 import history from "~/utils/history";
+import DocumentHistory from "~/scenes/Document/components/History";
+import DocumentInsights from "~/scenes/Document/components/Insights";
+import CommandBar from "~/components/CommandBar";
+
 import {
   searchPath,
   matchDocumentSlug as slug,
@@ -24,27 +28,27 @@ import {
 } from "~/utils/routeHelpers";
 import Fade from "./Fade";
 
-const DocumentHistory = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "document-history" */
-      "~/scenes/Document/components/History"
-    )
-);
-const DocumentInsights = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "document-insights" */
-      "~/scenes/Document/components/Insights"
-    )
-);
-const CommandBar = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "command-bar" */
-      "~/components/CommandBar"
-    )
-);
+// const DocumentHistory = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "document-history" */
+//       "app/scenes/Document/components/History"
+//     )
+// );
+// const DocumentInsights = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "document-insights" */
+//       "app/scenes/Document/components/Insights"
+//     )
+// );
+// const CommandBar = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "command-bar" */
+//       "~/components/CommandBar"
+//     )
+// );
 
 const AuthenticatedLayout: React.FC = ({ children }) => {
   const { ui, auth } = useStores();

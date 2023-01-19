@@ -5,40 +5,40 @@ import DelayedMount from "~/components/DelayedMount";
 import FullscreenLoading from "~/components/FullscreenLoading";
 import Route from "~/components/ProfiledRoute";
 import { matchDocumentSlug as slug } from "~/utils/routeHelpers";
+import Login from "~/scenes/Login";
+// import Authenticated from "~/components/Authenticated";
+import AuthenticatedRoutes from "./authenticated";
+import SharedDocument from "~/scenes/Document/Shared";
 
-const Authenticated = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "preload-authenticated" */
-      "~/components/Authenticated"
-    )
-);
-const AuthenticatedRoutes = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "preload-authenticated-routes" */
-      "./authenticated"
-    )
-);
-const SharedDocument = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "shared-document" */
-      "~/scenes/Document/Shared"
-    )
-);
-const Login = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "login" */
-      "~/scenes/Login"
-    )
-);
+const Authenticated = React.lazy(() => import(
+  "~/components/Authenticated"
+));
+// const AuthenticatedRoutes = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "preload-authenticated-routes" */
+//       "./authenticated"
+//     )
+// );
+// const SharedDocument = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "shared-document" */
+//       "app/scenes/Document/Shared"
+//     )
+// );
+// const Login = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "login" */
+//       "app/scenes/Login"
+//     )
+// );
 const Logout = React.lazy(
   () =>
     import(
       /* webpackChunkName: "logout" */
-      "~/scenes/Logout"
+      "app/scenes/Logout"
     )
 );
 

@@ -19,16 +19,20 @@ module.exports = {
       {
         test: /\.[jt]sx?$/,
         loader: 'babel-loader',
+        // use: [{
+        //   loader: 'babel-loader',
+        //   options: {
+        //     presets: ['@babel/preset-env', '@babel/preset-react', "@babel/preset-typescript"],
+
+        //   }
+        // }],
         exclude: [
           path.join(__dirname, 'node_modules')
         ],
         include: [
           path.join(__dirname, 'app'),
           path.join(__dirname, 'shared'),
-        ],
-        options: {
-          cacheDirectory: true
-        }
+        ]
       },
       // inline base64 URLs for <=8k images, direct URLs for the rest
       { test: /\.(png|jpg|svg)$/, loader: 'url-loader' },

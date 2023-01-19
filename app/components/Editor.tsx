@@ -29,14 +29,15 @@ import { isModKey } from "~/utils/keyboard";
 import { sharedDocumentPath } from "~/utils/routeHelpers";
 import { isHash } from "~/utils/urls";
 import DocumentBreadcrumb from "./DocumentBreadcrumb";
+import LazyLoadedEditor from "~/editor";
 
-const LazyLoadedEditor = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "preload-shared-editor" */
-      "~/editor"
-    )
-);
+// const LazyLoadedEditor = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "preload-shared-editor" */
+//       "~/editor"
+//     )
+// );
 
 export type Props = Optional<
   EditorProps,
@@ -258,7 +259,7 @@ function Editor(props: Props, ref: React.RefObject<SharedEditor> | null) {
       if (
         headings &&
         headings.map((h) => h.level + h.title).join("") !==
-          previousHeadings.current?.map((h) => h.level + h.title).join("")
+        previousHeadings.current?.map((h) => h.level + h.title).join("")
       ) {
         previousHeadings.current = headings;
         onHeadingsChange(headings);

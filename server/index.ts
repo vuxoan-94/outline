@@ -62,6 +62,8 @@ async function master() {
 
 // This function will only be called in each forked process
 async function start(id: number, disconnect: () => void) {
+  console.log(`Starting process ${id}`);
+
   // Find if SSL certs are available
   const ssl = getSSLOptions();
   const useHTTPS = !!ssl.key && !!ssl.cert;
@@ -102,7 +104,11 @@ async function start(id: number, disconnect: () => void) {
 
     Logger.info("lifecycle", `Starting ${name} service`);
     const init = services[name];
+    Logger.info(
+      "commands", name + "___before", server);
     await init(app, server, serviceNames);
+    Logger.info(
+      "commands", name + "___after", server);
   }
 
   server.on("error", (err) => {
@@ -113,8 +119,7 @@ async function start(id: number, disconnect: () => void) {
 
     Logger.info(
       "lifecycle",
-      `Listening on ${useHTTPS ? "https" : "http"}://localhost:${
-        (address as AddressInfo).port
+      `Listening on ${useHTTPS ? "https" : "http"}://localhost:${(address as AddressInfo).port
       }`
     );
   });

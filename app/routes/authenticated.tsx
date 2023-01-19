@@ -15,42 +15,47 @@ import WebsocketProvider from "~/components/WebsocketProvider";
 import useCurrentTeam from "~/hooks/useCurrentTeam";
 import usePolicy from "~/hooks/usePolicy";
 import { matchDocumentSlug as slug } from "~/utils/routeHelpers";
+import SettingsRoutes from "./settings";
+import Document from "~/scenes/Document";
+import Collection from "~/scenes/Collection";
+import Home from "~/scenes/Home";
+import Search from "~/scenes/Search";
 
-const SettingsRoutes = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "settings" */
-      "./settings"
-    )
-);
-const Document = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "preload-document" */
-      "~/scenes/Document"
-    )
-);
-const Collection = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "collection" */
-      "~/scenes/Collection"
-    )
-);
-const Home = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "home" */
-      "~/scenes/Home"
-    )
-);
-const Search = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "search" */
-      "~/scenes/Search"
-    )
-);
+// const SettingsRoutes = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "settings" */
+//       "./settings"
+//     )
+// );
+// const Document = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "preload-document" */
+//       "~/scenes/Document"
+//     )
+// );
+// const Collection = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "collection" */
+//       "~/scenes/Collection"
+//     )
+// );
+// const Home = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "home" */
+//       "~/scenes/Home"
+//     )
+// );
+// const Search = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "search" */
+//       "~/scenes/Search"
+//     )
+// );
 
 const RedirectDocument = ({
   match,

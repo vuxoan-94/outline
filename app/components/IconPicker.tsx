@@ -46,18 +46,19 @@ import Flex from "~/components/Flex";
 import { LabelText } from "~/components/Input";
 import NudeButton from "~/components/NudeButton";
 import Text from "~/components/Text";
+import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 
 const style = {
   width: 30,
   height: 30,
 };
-const TwitterPicker = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "twitter-picker" */
-      "react-color/lib/components/twitter/Twitter"
-    )
-);
+// const TwitterPicker = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "twitter-picker" */
+//       "react-color/lib/components/twitter/Twitter"
+//     )
+// );
 
 export const icons = {
   academicCap: {

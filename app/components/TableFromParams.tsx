@@ -4,14 +4,15 @@ import { useHistory, useLocation } from "react-router-dom";
 import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import useQuery from "~/hooks/useQuery";
 import type { Props } from "./Table";
+import Table from "~/components/Table";
 
-const Table = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "table" */
-      "~/components/Table"
-    )
-);
+// const Table = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "table" */
+//       "~/components/Table"
+//     )
+// );
 
 const TableFromParams = (
   props: Omit<Props, "onChangeSort" | "onChangePage" | "topRef">

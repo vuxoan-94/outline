@@ -138,5 +138,7 @@ export default function init(app: Koa = new Koa()): Koa {
     })
   );
   app.use(mount(routes));
+  Logger.info("processor", "Vu testing");
+
   return app;
 }
