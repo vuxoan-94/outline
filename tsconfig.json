@@ -2,20 +2,20 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
-    // "esModuleInterop": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    // "isolatedModules": true,
+    "isolatedModules": true,
     "baseUrl": ".",
     "jsx": "react",
     "lib": [
       "dom",
-      // "es2020",
+      "es2020",
       "dom.iterable",
-      // "esnext.asynciterable",
-      "scripthost",
-      "es2015.promise"
+      "esnext.asynciterable",
+      // "scripthost",
+      // "es2015.promise"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -29,7 +29,7 @@
     // "noEmit": true,
     // "allowJs": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es5",
+    "target": "es2020",
     "paths": {
       "prosemirror-markdown": [
         "./node_modules/@types/prosemirror-markdown"
