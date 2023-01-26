@@ -73,9 +73,9 @@ export default function init(app: Koa = new Koa()): Koa {
         ignored: ["node_modules", "flow-typed", "server", "build", "__mocks__"],
       },
       // Uncomment to test service worker
-      // headers: {
-      //   "Service-Worker-Allowed": "/",
-      // },
+      headers: {
+        "Service-Worker-Allowed": "/",
+      },
       // public path to bind the middleware to
       // use the same as in webpack
       publicPath: config.output.publicPath,

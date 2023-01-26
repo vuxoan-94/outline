@@ -10,7 +10,8 @@
           "version": "3",
           "proposals": true
         },
-        "useBuiltIns": "usage"
+        "useBuiltIns": "entry",
+        "exclude": ["proposal-dynamic-import"]
       }
     ]
   ],
@@ -25,6 +26,9 @@
     ],
     "@babel/plugin-transform-destructuring",
     "@babel/plugin-transform-regenerator",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-optional-chaining",
     "transform-class-properties"
+    // "tsconfig-paths-module-resolver"
   ]
 }

@@ -1,72 +1,107 @@
 /* eslint-disable */
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { RelativeCiAgentWebpackPlugin } = require("@relative-ci/agent");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
-require('dotenv').config({ silent: true });
+require("dotenv").config({ silent: true });
 
 module.exports = {
   output: {
-    path: path.join(__dirname, 'build/app'),
-    filename: '[name].[hash].js',
-    publicPath: '/static/',
+    path: path.join(__dirname, "build/app"),
+    filename: "[name].[hash].js",
+    chunkFilename: "[name].[hash].chunk.js",
+    publicPath: "/static/",
   },
   module: {
     rules: [
+      // {
+      //   test: /\.tsx?$/,
+      //   use: [
+      //     {
+      //       loader: "ts-loader",
+      //       options: {
+      //         transpileOnly: true,
+      //       },
+      //     },
+      //   ],
+      //   exclude: [path.join(__dirname, "node_modules")],
+      // },
       {
-        test: /\.[jt]sx?$/,
-        loader: 'babel-loader',
-        // use: [{
-        //   loader: 'babel-loader',
-        //   options: {
-        //     presets: ['@babel/preset-env', '@babel/preset-react', "@babel/preset-typescript"],
-
-        //   }
-        // }],
-        exclude: [
-          path.join(__dirname, 'node_modules')
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    corejs: {
+                      version: "3",
+                    },
+                    useBuiltIns: "usage",
+                    modules: false,
+                    // exclude: ["proposal-dynamic-import"],
+                  },
+                ],
+                "@babel/preset-react",
+                "@babel/preset-typescript",
+              ],
+              plugins: [
+                [
+                  "@babel/plugin-proposal-decorators",
+                  {
+                    legacy: true,
+                  },
+                ],
+              ],
+              cacheDirectory: true,
+            },
+          },
         ],
-        include: [
-          path.join(__dirname, 'app'),
-          path.join(__dirname, 'shared'),
-        ]
+        exclude: [path.join(__dirname, "node_modules")],
+        // include: [path.join(__dirname, "app")],
       },
       // inline base64 URLs for <=8k images, direct URLs for the rest
-      { test: /\.(png|jpg|svg)$/, loader: 'url-loader' },
+      { test: /\.(png|jpg|svg)$/, loader: "url-loader" },
       {
         test: /\.(woff|woff2|ttf|eot)$/,
         loader:
-          'url-loader?limit=1&mimetype=application/font-woff&name=public/fonts/[name].[ext]',
+          "url-loader?limit=1&mimetype=application/font-woff&name=public/fonts/[name].[ext]",
       },
-      { test: /\.md/, loader: 'raw-loader' },
+      { test: /\.md/, loader: "raw-loader" },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
-    modules: [
-      path.resolve(__dirname, 'app'),
-      'node_modules'
-    ],
+    extensions: [".ts", ".tsx", ".js", ".json"],
+    modules: ["app", "node_modules"],
     alias: {
-      "~": path.resolve(__dirname, 'app'),
-      "@shared": path.resolve(__dirname, 'shared'),
-      "@server": path.resolve(__dirname, 'server'),
-      'boundless-popover': 'boundless-popover/build',
-      'boundless-utils-omit-keys': 'boundless-utils-omit-keys/build',
-      'boundless-utils-uuid': 'boundless-utils-uuid/build'
-    }
+      "~": "/app",
+      "@shared": "/shared",
+      "@server": "/server",
+      "boundless-popover": "boundless-popover/build",
+      "boundless-utils-omit-keys": "boundless-utils-omit-keys/build",
+      "boundless-utils-uuid": "boundless-utils-uuid/build",
+    },
+    // plugins: [
+    //   new TsconfigPathsPlugin({
+    //     configFile: "./tsconfig.json",
+    //     extensions: [".tsx", ".ts", ".js"],
+    //   }),
+    // ],
   },
   plugins: [
     new webpack.IgnorePlugin(/unicode\/category\/So/),
     new HtmlWebpackPlugin({
-      template: 'server/static/index.html',
+      template: "server/static/index.html",
     }),
     new WebpackPwaManifest({
       name: "Outline",
@@ -86,7 +121,7 @@ module.exports = {
           sizes: [512, 192],
           purpose: "any maskable",
         },
-      ]
+      ],
     }),
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
@@ -95,32 +130,32 @@ module.exports = {
     }),
     new RelativeCiAgentWebpackPlugin(),
   ],
-  stats: {
-    assets: false,
-  },
-  optimization: {
-    runtimeChunk: 'single',
-    moduleIds: 'hashed',
-    chunkIds: 'named',
-    splitChunks: {
-      chunks: 'async',
-      minSize: 20000,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 30,
-      enforceSizeThreshold: 50000,
-      cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true,
-        }
-      }
-    }
-  }
+  // stats: {
+  //   assets: false,
+  // },
+  // optimization: {
+  //   runtimeChunk: "single",
+  //   moduleIds: "hashed",
+  //   chunkIds: "named",
+  //   splitChunks: {
+  //     chunks: "async",
+  //     minSize: 20000,
+  //     minChunks: 1,
+  //     maxAsyncRequests: 30,
+  //     maxInitialRequests: 30,
+  //     enforceSizeThreshold: 50000,
+  //     cacheGroups: {
+  //       defaultVendors: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         priority: -10,
+  //         reuseExistingChunk: true,
+  //       },
+  //       default: {
+  //         minChunks: 2,
+  //         priority: -20,
+  //         reuseExistingChunk: true,
+  //       },
+  //     },
+  //   },
+  // },
 };

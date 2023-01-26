@@ -1,5 +1,5 @@
 import "focus-visible";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion } from "framer-motion";
 import { KBarProvider } from "kbar";
 import { Provider } from "mobx-react";
 import * as React from "react";
@@ -63,10 +63,13 @@ if ("serviceWorker" in window.navigator) {
 }
 
 // Make sure to return the specific export containing the feature bundle.
-// const loadFeatures = () => import("./utils/motion").then((res) => res.default).catch((error) => {
-//   console.error(error);
-//   return Promise.reject(error);
-// });
+const loadFeatures = () =>
+  import("./utils/motion")
+    .then((res) => res.default)
+    .catch((error) => {
+      console.error(error);
+      return Promise.reject(error);
+    });
 
 const commandBarOptions = {
   animations: {
@@ -87,7 +90,7 @@ if (element) {
             <ErrorBoundary>
               <KBarProvider actions={[]} options={commandBarOptions}>
                 <LazyPolyfill>
-                  <LazyMotion features={domAnimation}>
+                  <LazyMotion features={loadFeatures}>
                     <Router history={history}>
                       <>
                         <PageTheme />
