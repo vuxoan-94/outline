@@ -4,31 +4,19 @@ import {
   ArchiveIcon,
   TrashIcon,
   EditIcon,
-  OpenIcon,
   SettingsIcon,
   ShapesIcon,
   KeyboardIcon,
-  EmailIcon,
   LogoutIcon,
-  ProfileIcon,
-  BrowserIcon,
+  ProfileIcon
 } from "outline-icons";
 import * as React from "react";
-import {
-  developersUrl,
-  changelogUrl,
-  feedbackUrl,
-  githubIssuesUrl,
-} from "@shared/utils/urlHelpers";
 import stores from "~/stores";
 import SearchQuery from "~/models/SearchQuery";
 import KeyboardShortcuts from "~/scenes/KeyboardShortcuts";
 import { createAction } from "~/actions";
 import { NavigationSection, RecentSearchesSection } from "~/actions/sections";
-import Desktop from "~/utils/Desktop";
-import { isMac } from "~/utils/browser";
 import history from "~/utils/history";
-import isCloudHosted from "~/utils/isCloudHosted";
 import {
   organizationSettingsPath,
   profileSettingsPath,
@@ -117,36 +105,6 @@ export const navigateToAccountPreferences = createAction({
   perform: () => history.push(accountPreferencesPath()),
 });
 
-export const openAPIDocumentation = createAction({
-  name: ({ t }) => t("API documentation"),
-  section: NavigationSection,
-  iconInContextMenu: false,
-  icon: <OpenIcon />,
-  perform: () => window.open(developersUrl()),
-});
-
-export const openFeedbackUrl = createAction({
-  name: ({ t }) => t("Send us feedback"),
-  section: NavigationSection,
-  iconInContextMenu: false,
-  icon: <EmailIcon />,
-  perform: () => window.open(feedbackUrl()),
-});
-
-export const openBugReportUrl = createAction({
-  name: ({ t }) => t("Report a bug"),
-  section: NavigationSection,
-  perform: () => window.open(githubIssuesUrl()),
-});
-
-export const openChangelog = createAction({
-  name: ({ t }) => t("Changelog"),
-  section: NavigationSection,
-  iconInContextMenu: false,
-  icon: <OpenIcon />,
-  perform: () => window.open(changelogUrl()),
-});
-
 export const openKeyboardShortcuts = createAction({
   name: ({ t }) => t("Keyboard shortcuts"),
   section: NavigationSection,
@@ -158,20 +116,6 @@ export const openKeyboardShortcuts = createAction({
       title: t("Keyboard shortcuts"),
       content: <KeyboardShortcuts />,
     });
-  },
-});
-
-export const downloadApp = createAction({
-  name: ({ t }) =>
-    t("Download {{ platform }} app", {
-      platform: isMac() ? "macOS" : "Windows",
-    }),
-  section: NavigationSection,
-  iconInContextMenu: false,
-  icon: <BrowserIcon />,
-  visible: () => !Desktop.isElectron() && isMac() && isCloudHosted,
-  perform: () => {
-    window.open("https://desktop.getoutline.com");
   },
 });
 
@@ -188,11 +132,6 @@ export const rootNavigationActions = [
   navigateToTemplates,
   navigateToArchive,
   navigateToTrash,
-  downloadApp,
-  openAPIDocumentation,
-  openFeedbackUrl,
-  openBugReportUrl,
-  openChangelog,
   openKeyboardShortcuts,
   logout,
 ];

@@ -9,14 +9,12 @@ import Flex from "~/components/Flex";
 import Scrollable from "~/components/Scrollable";
 import useSettingsConfig from "~/hooks/useSettingsConfig";
 import Desktop from "~/utils/Desktop";
-import isCloudHosted from "~/utils/isCloudHosted";
 import Sidebar from "./Sidebar";
 import Header from "./components/Header";
 import HeaderButton from "./components/HeaderButton";
 import HistoryNavigation from "./components/HistoryNavigation";
 import Section from "./components/Section";
 import SidebarLink from "./components/SidebarLink";
-import Version from "./components/Version";
 
 function SettingsSidebar() {
   const { t } = useTranslation();
@@ -54,12 +52,6 @@ function SettingsSidebar() {
               </Header>
             </Section>
           ))}
-          {!isCloudHosted && (
-            <Section>
-              <Header title={t("Installation")} />
-              <Version />
-            </Section>
-          )}
         </Scrollable>
       </Flex>
     </Sidebar>

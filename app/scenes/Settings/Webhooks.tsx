@@ -48,8 +48,7 @@ function Webhooks() {
       <Heading>{t("Webhooks")}</Heading>
       <Text type="secondary">
         <Trans>
-          Webhooks can be used to notify your application when events happen in{" "}
-          {{ appName }}. Events are sent as a https request with a JSON payload
+          Webhooks can be used to notify your application when events happen. Events are sent as a https request with a JSON payload
           in near real-time.
         </Trans>
       </Text>

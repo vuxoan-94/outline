@@ -47,13 +47,7 @@ function Tokens() {
       <Text type="secondary">
         <Trans
           defaults="You can create an unlimited amount of personal tokens to authenticate
-          with the API. Tokens have the same permissions as your user account.
-          For more details see the <em>developer documentation</em>."
-          components={{
-            em: (
-              <a href="https://www.getoutline.com/developers" target="_blank" />
-            ),
-          }}
+          with the API. Tokens have the same permissions as your user account."
         />
       </Text>
       <PaginatedList

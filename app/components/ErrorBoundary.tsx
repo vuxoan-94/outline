@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import * as React from "react";
 import { withTranslation, Trans, WithTranslation } from "react-i18next";
 import styled from "styled-components";
-import { githubIssuesUrl } from "@shared/utils/urlHelpers";
 import Button from "~/components/Button";
 import CenteredContent from "~/components/CenteredContent";
 import PageTitle from "~/components/PageTitle";
@@ -48,10 +47,6 @@ class ErrorBoundary extends React.Component<Props> {
 
   handleShowDetails = () => {
     this.showDetails = true;
-  };
-
-  handleReportBug = () => {
-    window.open(githubIssuesUrl());
   };
 
   render() {
@@ -102,11 +97,7 @@ class ErrorBoundary extends React.Component<Props> {
           {this.showDetails && <Pre>{error.toString()}</Pre>}
           <p>
             <Button onClick={this.handleReload}>{t("Reload")}</Button>{" "}
-            {this.showDetails ? (
-              <Button onClick={this.handleReportBug} neutral>
-                <Trans>Report a Bug</Trans>…
-              </Button>
-            ) : (
+            {!this.showDetails && (
               <Button onClick={this.handleShowDetails} neutral>
                 <Trans>Show Detail</Trans>…
               </Button>

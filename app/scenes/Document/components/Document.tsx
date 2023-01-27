@@ -15,13 +15,11 @@ import {
 import styled from "styled-components";
 import breakpoint from "styled-components-breakpoint";
 import { Heading } from "@shared/editor/lib/getHeadings";
-import { parseDomain } from "@shared/utils/domains";
 import getTasks from "@shared/utils/getTasks";
 import RootStore from "~/stores/RootStore";
 import Document from "~/models/Document";
 import Revision from "~/models/Revision";
 import DocumentMove from "~/scenes/DocumentMove";
-import Branding from "~/components/Branding";
 import ConnectionStatus from "~/components/ConnectionStatus";
 import ErrorBoundary from "~/components/ErrorBoundary";
 import Flex from "~/components/Flex";
@@ -640,11 +638,6 @@ class DocumentScene extends React.Component<Props> {
                 </Flex>
               </React.Suspense>
             </MaxWidth>
-            {isShare &&
-              !parseDomain(window.location.origin).custom &&
-              !auth.user && (
-                <Branding href="//www.getoutline.com?ref=sharelink" />
-              )}
           </Container>
         </Background>
         {!isShare && (
@@ -678,7 +671,7 @@ type MaxWidthProps = {
   showContents?: boolean;
 };
 
-const MaxWidth = styled(Flex)<MaxWidthProps>`
+const MaxWidth = styled(Flex) <MaxWidthProps>`
   // Adds space to the gutter to make room for heading annotations
   padding: 0 32px;
   transition: padding 100ms;

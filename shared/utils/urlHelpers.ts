@@ -24,30 +24,6 @@ export function slackAuth(
   return `${baseUrl}?${urlParams}`;
 }
 
-export function githubUrl(): string {
-  return "https://www.github.com/outline";
-}
-
-export function githubIssuesUrl(): string {
-  return "https://www.github.com/outline/outline/issues";
-}
-
-export function twitterUrl(): string {
-  return "https://twitter.com/getoutline";
-}
-
-export function feedbackUrl(): string {
-  return "https://www.getoutline.com/contact";
-}
-
-export function developersUrl(): string {
-  return "https://www.getoutline.com/developers";
-}
-
-export function changelogUrl(): string {
-  return "https://www.getoutline.com/changelog";
-}
-
 export function signin(service = "slack"): string {
   return `/auth/${service}`;
 }
