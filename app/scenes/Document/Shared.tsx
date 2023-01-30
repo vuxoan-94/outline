@@ -198,8 +198,4 @@ const Content = styled(Text)`
   margin-top: -8px;
 `;
 
-const SharedHeader = styled.div`
-  width: 100%;
-`;
-
 export default observer(SharedDocumentScene);

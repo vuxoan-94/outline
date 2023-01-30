@@ -155,9 +155,9 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(
 
     const style = React.useMemo(
       () => ({
-        width: `${width}px`,
+        width: `${collapsed ? 0 : width}px`,
       }),
-      [width]
+      [width, collapsed]
     );
 
     const toggleStyle = React.useMemo(
@@ -253,9 +253,9 @@ type ContainerProps = {
   $isScrolled: boolean;
 };
 
-const Container = styled(Flex) <ContainerProps>`
+const Container = styled(Flex)<ContainerProps>`
   position: sticky;
-  max-height: 100vh;
+  height: 100vh;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -263,12 +263,11 @@ const Container = styled(Flex) <ContainerProps>`
   transition: box-shadow 100ms ease-in-out, transform 100ms ease-out,
     ${(props) => props.theme.backgroundTransition}
       ${(props: ContainerProps) =>
-    props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
+        props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
   transform: translateX(
     ${(props) => (props.$mobileSidebarVisible ? 0 : "-100%")}
   );
   z-index: ${depths.sidebar};
-  max-width: 70%;
   min-width: 280px;
   padding-top: ${Desktop.hasInsetTitlebar() ? 36 : 0}px;
   ${draggableOnDesktop()}
@@ -295,9 +294,9 @@ const Container = styled(Flex) <ContainerProps>`
     &:focus-within {
       transform: none;
       box-shadow: ${(props: ContainerProps) =>
-      props.$collapsed
-        ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
-        : props.$isSmallerThanMinimum
+        props.$collapsed
+          ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
+          : props.$isSmallerThanMinimum
           ? "rgba(0, 0, 0, 0.1) inset -1px 0 2px"
           : "none"};
 
