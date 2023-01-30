@@ -109,7 +109,7 @@ type WrapperProps = {
   $insetTitleAdjust?: boolean;
 };
 
-const Wrapper = styled(Flex)<WrapperProps>`
+const Wrapper = styled(Flex) <WrapperProps>`
   top: 0;
   z-index: ${depths.header};
   position: sticky;

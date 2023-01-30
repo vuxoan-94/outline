@@ -104,8 +104,8 @@ class Share extends IdModel {
 
   get canonicalUrl() {
     return this.urlId
-      ? `${this.team.url}/s/${this.urlId}`
-      : `${this.team.url}/s/${this.id}`;
+      ? `${this.team.url}/document/${this.urlId}`
+      : `${this.team.url}/document/${this.id}`;
   }
 
   // associations

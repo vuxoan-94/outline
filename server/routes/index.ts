@@ -116,20 +116,20 @@ router.get("/opensearch.xml", (ctx) => {
   ctx.body = opensearchResponse(ctx.request.URL.origin);
 });
 
-router.get("/s/:shareId", renderShare);
-router.get("/s/:shareId/doc/:documentSlug", renderShare);
-router.get("/s/:shareId/*", renderShare);
+router.get("/document/:shareId", renderShare);
+router.get("/document/:shareId/doc/:documentSlug", renderShare);
+router.get("/document/:shareId/*", renderShare);
 
 // catch all for application
 router.get("*", async (ctx, next) => {
   const team = await getTeamFromContext(ctx);
   const analytics = team
     ? await Integration.findOne({
-        where: {
-          teamId: team.id,
-          type: IntegrationType.Analytics,
-        },
-      })
+      where: {
+        teamId: team.id,
+        type: IntegrationType.Analytics,
+      },
+    })
     : undefined;
 
   // Redirect all requests to custom domain if one is set

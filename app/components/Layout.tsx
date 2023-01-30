@@ -55,13 +55,6 @@ const Layout: React.FC<Props> = ({
           $isResizing={ui.sidebarIsResizing}
           $sidebarCollapsed={sidebarCollapsed}
           $hasSidebar={!!sidebar}
-          style={
-            sidebarCollapsed
-              ? undefined
-              : {
-                  marginLeft: `${ui.sidebarWidth}px`,
-                }
-          }
         >
           {children}
         </Content>
@@ -87,7 +80,7 @@ type ContentProps = {
   theme: DefaultTheme;
 };
 
-const Content = styled(Flex)<ContentProps>`
+const Content = styled(Flex) <ContentProps>`
   margin: 0;
   transition: ${(props) =>
     props.$isResizing ? "none" : `margin-left 100ms ease-out`};

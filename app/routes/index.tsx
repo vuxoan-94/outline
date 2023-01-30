@@ -54,17 +54,17 @@ export default function Routes() {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/desktop-redirect" component={DesktopRedirect} />
 
-        <Redirect exact from="/share/:shareId" to="/s/:shareId" />
-        <Route exact path="/s/:shareId" component={SharedDocument} />
+        <Redirect exact from="/share/:shareId" to="/document/:shareId" />
+        <Route exact path="/document/:shareId" component={SharedDocument} />
 
         <Redirect
           exact
           from={`/share/:shareId/doc/${slug}`}
-          to={`/s/:shareId/doc/${slug}`}
+          to={`/document/:shareId/doc/${slug}`}
         />
         <Route
           exact
-          path={`/s/:shareId/doc/${slug}`}
+          path={`/document/:shareId/doc/${slug}`}
           component={SharedDocument}
         />
 

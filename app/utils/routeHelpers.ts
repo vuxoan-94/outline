@@ -126,7 +126,7 @@ export function searchPath(
 }
 
 export function sharedDocumentPath(shareId: string, docPath?: string) {
-  return docPath ? `/s/${shareId}${docPath}` : `/s/${shareId}`;
+  return docPath ? `/document/${shareId}${docPath}` : `/document/${shareId}`;
 }
 
 export function notFoundUrl(): string {

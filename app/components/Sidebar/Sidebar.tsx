@@ -1,3 +1,4 @@
+import { throttle } from "lodash";
 import { observer } from "mobx-react";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -18,6 +19,8 @@ import Avatar from "../Avatar";
 import HeaderButton, { HeaderButtonProps } from "./components/HeaderButton";
 import ResizeBorder from "./components/ResizeBorder";
 import Toggle, { ToggleButton, Positioner } from "./components/Toggle";
+import useEventListener from "~/hooks/useEventListener";
+import { supportsPassiveListener } from "~/utils/browser";
 
 const ANIMATION_MS = 250;
 
@@ -46,6 +49,19 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(
     const [isAnimating, setAnimating] = React.useState(false);
     const [isResizing, setResizing] = React.useState(false);
     const isSmallerThanMinimum = width < minWidth;
+
+    const [isScrolled, setScrolled] = React.useState(false);
+    const handleScroll = React.useMemo(
+      () => throttle(() => setScrolled(window.scrollY > 75), 10),
+      []
+    );
+
+    useEventListener(
+      "scroll",
+      handleScroll,
+      window,
+      supportsPassiveListener ? { passive: true } : { capture: false }
+    );
 
     const handleDrag = React.useCallback(
       (event: MouseEvent) => {
@@ -161,6 +177,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(
           $isSmallerThanMinimum={isSmallerThanMinimum}
           $mobileSidebarVisible={ui.mobileSidebarVisible}
           $collapsed={collapsed}
+          $isScrolled={isScrolled}
           column
         >
           {ui.mobileSidebarVisible && (
@@ -233,10 +250,12 @@ type ContainerProps = {
   $isAnimating: boolean;
   $isSmallerThanMinimum: boolean;
   $collapsed: boolean;
+  $isScrolled: boolean;
 };
 
-const Container = styled(Flex)<ContainerProps>`
-  position: fixed;
+const Container = styled(Flex) <ContainerProps>`
+  position: sticky;
+  max-height: 100vh;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -244,7 +263,7 @@ const Container = styled(Flex)<ContainerProps>`
   transition: box-shadow 100ms ease-in-out, transform 100ms ease-out,
     ${(props) => props.theme.backgroundTransition}
       ${(props: ContainerProps) =>
-        props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
+    props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
   transform: translateX(
     ${(props) => (props.$mobileSidebarVisible ? 0 : "-100%")}
   );
@@ -276,9 +295,9 @@ const Container = styled(Flex)<ContainerProps>`
     &:focus-within {
       transform: none;
       box-shadow: ${(props: ContainerProps) =>
-        props.$collapsed
-          ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
-          : props.$isSmallerThanMinimum
+      props.$collapsed
+        ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
+        : props.$isSmallerThanMinimum
           ? "rgba(0, 0, 0, 0.1) inset -1px 0 2px"
           : "none"};
 

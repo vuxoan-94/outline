@@ -23,6 +23,7 @@ import { changeLanguage, detectLanguage } from "~/utils/language";
 import Login from "../Login";
 import Document from "./components/Document";
 import Loading from "./components/Loading";
+import ShareHeader from "./components/ShareHeader";
 
 const EMPTY_OBJECT = {};
 
@@ -177,6 +178,7 @@ function SharedDocumentScene(props: Props) {
           href={canonicalOrigin + location.pathname.replace(/\/$/, "")}
         />
       </Helmet>
+      <ShareHeader />
       <Layout title={response.document.title} sidebar={sidebar}>
         <Document
           abilities={EMPTY_OBJECT}
@@ -194,6 +196,10 @@ const Content = styled(Text)`
   color: ${(props) => props.theme.textSecondary};
   text-align: center;
   margin-top: -8px;
+`;
+
+const SharedHeader = styled.div`
+  width: 100%;
 `;
 
 export default observer(SharedDocumentScene);
