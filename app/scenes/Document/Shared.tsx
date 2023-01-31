@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { RouteComponentProps, useLocation, Redirect } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
+import breakpoint from "styled-components-breakpoint";
 import { setCookie } from "tiny-cookie";
 import DocumentModel from "~/models/Document";
 import Team from "~/models/Team";
@@ -195,7 +196,9 @@ function SharedDocumentScene(props: Props) {
 }
 
 const ShareContainer = styled.div`
-  max-width: 1610px;
+  ${breakpoint("mobile")`
+    max-width: calc(100vw - 312px);
+  `}
   margin: auto;
 `;
 

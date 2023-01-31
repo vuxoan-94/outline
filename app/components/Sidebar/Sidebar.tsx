@@ -255,7 +255,7 @@ type ContainerProps = {
   $isScrolled: boolean;
 };
 
-const Container = styled(Flex) <ContainerProps>`
+const Container = styled(Flex)<ContainerProps>`
   position: sticky;
   height: 100vh;
   top: 0;
@@ -265,12 +265,8 @@ const Container = styled(Flex) <ContainerProps>`
   transition: box-shadow 100ms ease-in-out, transform 100ms ease-out,
     ${(props) => props.theme.backgroundTransition}
       ${(props: ContainerProps) =>
-    props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
-  transform: translateX(
-    ${(props) => (props.$mobileSidebarVisible ? 0 : "-100%")}
-  );
+        props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
   z-index: ${depths.sidebar};
-  min-width: 280px;
   padding-top: ${Desktop.hasInsetTitlebar() ? 36 : 0}px;
   ${draggableOnDesktop()}
   ${fadeOnDesktopBackgrounded()}
@@ -287,19 +283,15 @@ const Container = styled(Flex) <ContainerProps>`
   ${breakpoint("tablet")`
     margin: 0;
     min-width: 0;
-    transform: translateX(${(props: ContainerProps) =>
-      props.$collapsed
-        ? `calc(-100% + ${Desktop.hasInsetTitlebar() ? 8 : 16}px)`
-        : 0});
     transition: width 100ms ease-out;
 
     &:hover,
     &:focus-within {
       transform: none;
       box-shadow: ${(props: ContainerProps) =>
-      props.$collapsed
-        ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
-        : props.$isSmallerThanMinimum
+        props.$collapsed
+          ? "rgba(0, 0, 0, 0.2) 1px 0 4px"
+          : props.$isSmallerThanMinimum
           ? "rgba(0, 0, 0, 0.1) inset -1px 0 2px"
           : "none"};
 
