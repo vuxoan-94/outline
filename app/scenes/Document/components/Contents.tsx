@@ -55,25 +55,23 @@ export default function Contents({ headings, isFullWidth }: Props) {
   return (
     <Wrapper isFullWidth={isFullWidth}>
       <Sticky>
-        <Heading>{t("Contents")}</Heading>
-        {headings.length ? (
-          <List>
-            {headings
-              .filter((heading) => heading.level < 4)
-              .map((heading) => (
-                <ListItem
-                  key={heading.id}
-                  level={heading.level - headingAdjustment}
-                  active={activeSlug === heading.id}
-                >
-                  <Link href={`#${heading.id}`}>{heading.title}</Link>
-                </ListItem>
-              ))}
-          </List>
-        ) : (
-          <Empty>
-            {t("Headings you add to the document will appear here")}
-          </Empty>
+        {headings.length > 0 && (
+          <>
+            <Heading>{t("Contents")}</Heading>
+            <List>
+              {headings
+                .filter((heading) => heading.level < 4)
+                .map((heading) => (
+                  <ListItem
+                    key={heading.id}
+                    level={heading.level - headingAdjustment}
+                    active={activeSlug === heading.id}
+                  >
+                    <Link href={`#${heading.id}`}>{heading.title}</Link>
+                  </ListItem>
+                ))}
+            </List>
+          </>
         )}
       </Sticky>
     </Wrapper>
@@ -139,7 +137,7 @@ const ListItem = styled.li<{ level: number; active?: boolean }>`
   a {
     font-weight: ${(props) => (props.active ? "600" : "inherit")};
     color: ${(props) =>
-      props.active ? props.theme.primary : props.theme.text};
+    props.active ? props.theme.primary : props.theme.text};
   }
 `;
 

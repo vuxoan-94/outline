@@ -83,7 +83,7 @@ type ContentProps = {
 const Content = styled(Flex) <ContentProps>`
   margin: 0;
   transition: ${(props) =>
-    props.$isResizing ? "none" : `margin-left 100ms ease-out`};
+    props.$isResizing ? "none" : `width 100ms ease-out`};
 
   @media print {
     margin: 0 !important;

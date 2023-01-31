@@ -11,6 +11,11 @@ declare module "*.png" {
   export = value;
 }
 
+declare module "*.svg" {
+  const value: any;
+  export = value;
+}
+
 declare namespace JSX {
   interface IntrinsicElements {
     "zapier-app-directory": any;

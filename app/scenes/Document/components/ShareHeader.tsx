@@ -1,53 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-import shareLogo from "./share-logo.png";
+import shareLogo from "./niteco-logo.svg";
 import { CodeIcon, DocumentIcon, PromoteIcon } from "outline-icons";
 import Tab from "~/components/Tab";
 import Tabs from "~/components/Tabs";
 
 type HeaderItem = {
-  title: string;
-  url: string;
-  icon: React.FC<any>;
+    title: string;
+    url: string;
+    icon: React.FC<any>;
 };
 
 const headerItems: HeaderItem[] = [
-  {
-    title: "Support Docs",
-    url: "/document/support-docs",
-    icon: DocumentIcon,
-  },
-  {
-    title: "API Reference",
-    url: "/document/api-reference",
-    icon: CodeIcon,
-  },
-  {
-    title: "Changelog",
-    url: "/document/changelog",
-    icon: PromoteIcon,
-  },
+    {
+        title: "Support Docs",
+        url: "/document/support-docs",
+        icon: DocumentIcon,
+    },
+    {
+        title: "API Reference",
+        url: "/document/api-reference",
+        icon: CodeIcon,
+    },
+    {
+        title: "Changelog",
+        url: "/document/changelog",
+        icon: PromoteIcon,
+    },
 ];
 
 function ShareHeader() {
-  return (
-    <Wrapper>
-      <img src={shareLogo} alt="share-logo" />
-      <Tabs>
-        {headerItems.map((item, index) => (
-          <Tab key={index} to={item.url}>
-            <HeaderTabWrapper>
-              {item.icon && (
-                <IconWrapper>{<item.icon color="currentColor" />}</IconWrapper>
-              )}
-              {item.title}
-            </HeaderTabWrapper>
-          </Tab>
-        ))}
-      </Tabs>
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <ShareLogo src={shareLogo} alt="share-logo" />
+            <Tabs>
+                {headerItems.map((item, index) => (
+                    <Tab key={index} to={item.url}>
+                        <HeaderTabWrapper>
+                            {item.icon && (
+                                <IconWrapper>{<item.icon color="currentColor" />}</IconWrapper>
+                            )}
+                            {item.title}
+                        </HeaderTabWrapper>
+                    </Tab>
+                ))}
+            </Tabs>
+        </Wrapper>
+    );
 }
+
+const ShareLogo = styled.img`
+    margin-left: -8px;
+`;
 
 const HeaderTabWrapper = styled.div`
   display: inline-flex;
@@ -65,7 +69,7 @@ const IconWrapper = styled.span`
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 10px 8px;
+  padding: 10px 156px;
   background-color: #1b1b1b;
 `;
 

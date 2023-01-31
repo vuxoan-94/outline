@@ -179,18 +179,25 @@ function SharedDocumentScene(props: Props) {
         />
       </Helmet>
       <ShareHeader />
-      <Layout title={response.document.title} sidebar={sidebar}>
-        <Document
-          abilities={EMPTY_OBJECT}
-          document={response.document}
-          sharedTree={response.sharedTree}
-          shareId={shareId}
-          readOnly
-        />
-      </Layout>
+      <ShareContainer>
+        <Layout title={response.document.title} sidebar={sidebar}>
+          <Document
+            abilities={EMPTY_OBJECT}
+            document={response.document}
+            sharedTree={response.sharedTree}
+            shareId={shareId}
+            readOnly
+          />
+        </Layout>
+      </ShareContainer>
     </>
   );
 }
+
+const ShareContainer = styled.div`
+  max-width: 1610px;
+  margin: auto;
+`;
 
 const Content = styled(Text)`
   color: ${(props) => props.theme.textSecondary};
