@@ -11,3 +11,4 @@ cp ./server/static/error.prod.html ./build/server/error.prod.html
 
 # Link webpack config
 ln -sf "$(pwd)/webpack.config.dev.js" ./build
+ln -sf "$(pwd)/webpack.config.js" ./build
