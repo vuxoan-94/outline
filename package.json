@@ -1,7 +1,7 @@
 {
-  "name": "outline",
+  "name": "niteco",
   "private": true,
-  "license": "Business Source License 1.1",
+  "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build",
@@ -30,16 +30,8 @@
     "test:shared": "jest --config=.jestconfig.json --selectProjects shared-node shared-jsdom",
     "test:server": "jest --config=.jestconfig.json --selectProjects server"
   },
-  "funding": {
-    "type": "GitHub Sponsors ❤",
-    "url": "https://github.com/sponsors/outline"
-  },
   "engines": {
     "node": ">= 14 <=16"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/outline/outline.git"
   },
   "browserslist": [
     "> 0.25%, not dead"

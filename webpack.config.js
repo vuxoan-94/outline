@@ -104,8 +104,8 @@ module.exports = {
       template: "server/static/index.html",
     }),
     new WebpackPwaManifest({
-      name: "Outline",
-      short_name: "Outline",
+      name: "Niteco",
+      short_name: "Niteco",
       background_color: "#fff",
       theme_color: "#fff",
       start_url: "/",

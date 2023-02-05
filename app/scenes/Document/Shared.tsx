@@ -196,7 +196,7 @@ function SharedDocumentScene(props: Props) {
 }
 
 const ShareContainer = styled.div`
-  ${breakpoint("mobile")`
+  ${breakpoint("tablet")`
     max-width: calc(100vw - 312px);
   `}
   margin: auto;

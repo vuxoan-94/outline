@@ -26,10 +26,11 @@ const ANIMATION_MS = 250;
 
 type Props = {
   children: React.ReactNode;
+  isMobile?: boolean;
 };
 
 const Sidebar = React.forwardRef<HTMLDivElement, Props>(
-  ({ children }: Props, ref: React.RefObject<HTMLDivElement>) => {
+  ({ children, isMobile }: Props, ref: React.RefObject<HTMLDivElement>) => {
     const [isCollapsing, setCollapsing] = React.useState(false);
     const theme = useTheme();
     const { t } = useTranslation();
@@ -155,9 +156,9 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(
 
     const style = React.useMemo(
       () => ({
-        width: `${collapsed ? 0 : width}px`,
+        width: `${isMobile ? width : collapsed ? 0 : width}px`,
       }),
-      [width, collapsed]
+      [width, collapsed, isMobile]
     );
 
     const toggleStyle = React.useMemo(
@@ -178,6 +179,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(
           $mobileSidebarVisible={ui.mobileSidebarVisible}
           $collapsed={collapsed}
           $isScrolled={isScrolled}
+          $isMobile={isMobile}
           column
         >
           {ui.mobileSidebarVisible && (
@@ -253,10 +255,11 @@ type ContainerProps = {
   $isSmallerThanMinimum: boolean;
   $collapsed: boolean;
   $isScrolled: boolean;
+  $isMobile?: boolean;
 };
 
 const Container = styled(Flex)<ContainerProps>`
-  position: sticky;
+  position: ${(props) => (props.$isMobile ? "fixed" : "sticky")};
   height: 100vh;
   top: 0;
   bottom: 0;
@@ -266,6 +269,9 @@ const Container = styled(Flex)<ContainerProps>`
     ${(props) => props.theme.backgroundTransition}
       ${(props: ContainerProps) =>
         props.$isAnimating ? `,width ${ANIMATION_MS}ms ease-out` : ""};
+  transform: translateX(
+    ${(props) => (props.$mobileSidebarVisible ? 0 : "-100%")}
+  );
   z-index: ${depths.sidebar};
   padding-top: ${Desktop.hasInsetTitlebar() ? 36 : 0}px;
   ${draggableOnDesktop()}
@@ -283,6 +289,7 @@ const Container = styled(Flex)<ContainerProps>`
   ${breakpoint("tablet")`
     margin: 0;
     min-width: 0;
+    transform: translateX(0);
     transition: width 100ms ease-out;
 
     &:hover,

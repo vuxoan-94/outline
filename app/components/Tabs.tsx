@@ -1,3 +1,4 @@
+import { dark } from "@shared/styles/theme";
 import { AnimateSharedLayout } from "framer-motion";
 import { transparentize } from "polished";
 import * as React from "react";
@@ -38,14 +39,16 @@ const Nav = styled.nav<{ $shadowVisible?: boolean }>`
 
 // When sticky we need extra background coverage around the sides otherwise
 // items that scroll past can "stick out" the sides of the heading
-const Sticky = styled.div`
+const Sticky = styled.div<{ $transparentBackGround?: boolean }>`
   position: sticky;
   top: 54px;
   margin: 0 -8px;
   padding: 0 8px;
-  background: ${(props) => props.theme.background};
+  background: ${(props) =>
+    props.$transparentBackGround ? "transparent" : props.theme.background};
   transition: ${(props) => props.theme.backgroundTransition};
   z-index: 1;
+  flex: 1;
 `;
 
 export const Separator = styled.span`
@@ -56,7 +59,11 @@ export const Separator = styled.span`
   margin-top: 6px;
 `;
 
-const Tabs: React.FC = ({ children }) => {
+type TabsProps = {
+  transparentBackGround?: boolean;
+};
+
+const Tabs: React.FC<TabsProps> = ({ children, transparentBackGround }) => {
   const ref = React.useRef<any>();
   const [shadowVisible, setShadow] = React.useState(false);
   const { width } = useWindowSize();
@@ -81,7 +88,7 @@ const Tabs: React.FC = ({ children }) => {
 
   return (
     <AnimateSharedLayout>
-      <Sticky>
+      <Sticky $transparentBackGround={transparentBackGround}>
         <Nav ref={ref} onScroll={updateShadows} $shadowVisible={shadowVisible}>
           {children}
         </Nav>

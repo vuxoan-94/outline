@@ -14,6 +14,7 @@ import Sidebar from "./Sidebar";
 import HeaderButton from "./components/HeaderButton";
 import Section from "./components/Section";
 import DocumentLink from "./components/SharedDocumentLink";
+import useMobile from "~/hooks/useMobile";
 
 type Props = {
   team?: Team;
@@ -24,9 +25,10 @@ type Props = {
 function SharedSidebar({ rootNode, team, shareId }: Props) {
   const { ui, documents, auth } = useStores();
   const { t } = useTranslation();
+  const isMobile = useMobile();
 
   return (
-    <Sidebar>
+    <Sidebar isMobile={isMobile}>
       {team && (
         <HeaderButton
           title={team.name}
@@ -59,6 +61,18 @@ function SharedSidebar({ rootNode, team, shareId }: Props) {
 
 const ScrollContainer = styled(Scrollable)`
   padding-bottom: 16px;
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #b8c0c8;
+    border-radius: 10px;
+  }
 `;
 
 const TopSection = styled(Section)`
