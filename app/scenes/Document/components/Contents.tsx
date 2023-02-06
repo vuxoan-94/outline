@@ -95,8 +95,8 @@ const Wrapper = styled.div<{ isFullWidth: boolean }>`
 `;
 
 const Sticky = styled.div`
-  position: sticky;
-  top: 80px;
+  position: relative;
+  left: 20px;
   max-height: calc(100vh - 80px);
 
   background: ${(props) => props.theme.background};
@@ -131,13 +131,12 @@ const Empty = styled(Text)`
 const ListItem = styled.li<{ level: number; active?: boolean }>`
   margin-left: ${(props) => (props.level - 1) * 10}px;
   margin-bottom: 8px;
-  padding-right: 2em;
   line-height: 1.3;
 
   a {
     font-weight: ${(props) => (props.active ? "600" : "inherit")};
     color: ${(props) =>
-    props.active ? props.theme.primary : props.theme.text};
+      props.active ? props.theme.primary : props.theme.text};
   }
 `;
 

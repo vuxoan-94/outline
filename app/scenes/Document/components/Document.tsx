@@ -671,7 +671,7 @@ type MaxWidthProps = {
   showContents?: boolean;
 };
 
-const MaxWidth = styled(Flex) <MaxWidthProps>`
+const MaxWidth = styled(Flex)<MaxWidthProps>`
   // Adds space to the gutter to make room for heading annotations
   padding: 0 32px;
   transition: padding 100ms;
@@ -690,7 +690,7 @@ const MaxWidth = styled(Flex) <MaxWidthProps>`
 
   ${breakpoint("desktopLarge")`
     max-width: ${(props: MaxWidthProps) =>
-      props.isFullWidth ? "100vw" : `calc(64px + 52em);`}
+      props.isFullWidth ? "100vw" : `calc(64px + 59em);`}
   `};
 `;
 
